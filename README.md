@@ -1,7 +1,5 @@
 # Secure Ubuntu Server Deployment
-[
-[
-[
+
 
 **Production-ready Ubuntu server automation with UFW firewall, Fail2Ban brute-force protection, and Nextcloud private cloud deployment.**
 
