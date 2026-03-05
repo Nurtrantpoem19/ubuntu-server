@@ -1,0 +1,60 @@
+---
+- name: Secure Ubuntu Server Setup
+  hosts: servers
+  become: true  # Run as sudo
+
+  vars_prompt:
+    - name: whitelist_ip
+      prompt: "Whitelist IP (your home IP)"
+      default:
+      private: no
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install UFW and Fail2Ban
+      apt:
+        name:
+          - ufw
+          - fail2ban
+        state: present
+
+    - name: Enable UFW with default deny incoming
+      ufw:
+        state: enabled
+        policy: deny
+
+    - name: Allow SSH
+      ufw:
+        rule: allow
+        port: 22
+
+    - name: Allow HTTP/HTTPS for Nextcloud
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+      loop:
+        - 80
+        - 443
+
+    - name: Whitelist your IP in Fail2Ban jail.local
+      lineinfile:
+        path: /etc/fail2ban/jail.local
+        line: 'ignoreip = 127.0.0.1/8 {{ whitelist_ip}}'
+        create: yes
+        insertafter: '^\[DEFAULT\]'
+
+    - name: Install Nextcloud snap (if not already)
+      snap:
+        name: nextcloud
+        state: present
+
+    - name: Restart services
+      systemd:
+        name: "{{ item }}"
+        state: restarted
+      loop:
+        - ufw
+        - fail2ban
