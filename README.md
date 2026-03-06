@@ -4,27 +4,28 @@
 **Production-ready Ubuntu server automation with UFW firewall, Fail2Ban brute-force protection, and Nextcloud private cloud deployment.**
 
 ## 🎯 Features
-- [] **UFW Firewall**: Deny-all incoming, SSH/HTTP/HTTPS only
-- [] **Fail2Ban**: SSH + web login protection (custom whitelist)
-- [] **Nextcloud**: Snap deployment with HTTPS ready
-- [] **Automated**: Single playbook deploys everything in ~2 minutes
-- [] **Secure**: No passwords in repo, interactive configuration
+- **UFW Firewall**: Deny-all incoming, SSH/HTTP/HTTPS only
+- **Fail2Ban**: SSH + web login protection (custom whitelist)
+- **Nextcloud**: Snap deployment with HTTPS ready
+- **Automated**: Single playbook deploys everything in ~2 minutes
+- **Secure**: No passwords in repo, interactive configuration
 
-## 🚀 Quick Start (60 seconds)
+## Run these commands in your terminal to set up ansible
 ```bash
 # 1. Install Ansible (laptop/local machine)
 sudo apt install ansible
 
 # 2. Clone this repo
-git clone https://github.com/YOURUSERNAME/secure-ubuntu-server
+git clone https://github.com/Nurtrantpoem19/ubuntu-server.git
 cd secure-ubuntu-server
 
-# 3. Copy & edit inventory
-cp inventory.template.ini inventory.ini
+# 3. Edit inventory
 # Edit inventory.ini: set server_ip & ansible_user
+# replace with your local server_ip and your server's username, respectively
 
 # 4. Dry run (safe)
-ansible-playbook -i inventory.ini playbook.yml --check
+ansible-playbook -i inventory.ini playbook.yml --check -K
+#the -K flag is for when it prompts you for sudo password
 
 # 5. Deploy!
 ansible-playbook -i inventory.ini playbook.yml
@@ -34,8 +35,8 @@ ansible-playbook -i inventory.ini playbook.yml
 ```
 .
 ├── playbook.yml           # Main automation playbook
-├── inventory.template.ini # Copy → inventory.ini & edit
-├── README.md             # You're reading it!
+├── inventory.ini # To be edited
+├── README.md            
 └── screenshots/          # UFW/Fail2Ban/Nextcloud visuals
 ```
 
@@ -47,10 +48,10 @@ ansible-playbook -i inventory.ini playbook.yml
 
 ## 📊 Results (My Production Server)
 ```
-UFW Status: Status: active (blocked 1,247 connections)
-Fail2Ban: 127 IPs banned (SSH: 89, Nextcloud: 38)
+UFW Status: Status: active (blocked 3158 connections)
+Fail2Ban: active, will ban any IP who attempts connection without passphrase
 Nextcloud: 2.5GB data, HTTPS via Let's Encrypt
-Uptime: 47 days
+Uptime: 30 days
 ```
 
 ## 💼 Why This Matters (CAR Method)
