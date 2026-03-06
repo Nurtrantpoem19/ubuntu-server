@@ -60,6 +60,7 @@ Uptime: 30 days
 **Result**: Production server running 47 days, blocked 100+ attacks, 2.5GB data synced securely.
 
 ## 📸 Screenshots
+![UFW Status] (screenshots/ufw.png)
 
 
 
