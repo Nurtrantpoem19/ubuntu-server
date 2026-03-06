@@ -5,7 +5,7 @@
 
 ## 🎯 Features
 - **UFW Firewall**: Deny-all incoming, SSH/HTTP/HTTPS only
-- **Fail2Ban**: SSH + web login protection (custom whitelist)
+- **Fail2Ban**: SSH login protection (custom whitelist)
 - **Nextcloud**: Snap deployment with HTTPS ready
 - **Automated**: Single playbook deploys everything in ~2 minutes
 - **Secure**: No passwords in repo, interactive configuration
@@ -50,7 +50,7 @@ ansible-playbook -i inventory.ini playbook.yml
 ```
 UFW Status: Status: active (blocked 3158 connections)
 Fail2Ban: active, will ban any IP who attempts connection without passphrase
-Nextcloud: 2.5GB data, HTTPS via Let's Encrypt
+Nextcloud: 7 GB data synced, HTTPS via Let's Encrypt
 Uptime: 30 days
 ```
 
@@ -60,10 +60,15 @@ Uptime: 30 days
 **Result**: Production server running 47 days, blocked 100+ attacks, 2.5GB data synced securely.
 
 ## 📸 Screenshots
-![UFW Status] (screenshots/ufw.png)
+![UFW Status](screenshots/ufwstatus.png)
+![Fail2BanJail](screenshots/jail.png)
+![ansible](screenshots/ansible.png)
+![nextcloud](screenshots/nextcloud.png)
 
 
 
+## Extra Side Quests
+**Might want to add a cron job to sync your nextcloud if that's what you're looking to do**
 
 ## 🔧 Customization
 Edit `playbook.yml` `vars_prompt` section:
